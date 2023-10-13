@@ -31,7 +31,7 @@ plt.xlabel("Process ID")
 plt.ylabel("Turnaround Time")
 plt.xticks(processes)
 plt.tight_layout()
-plt.savefig('turnaround_times.png')
+plt.savefig('pics/turnaround_times.png')
 plt.show()
 
 
@@ -43,7 +43,7 @@ plt.xlabel("Process ID")
 plt.ylabel("Burst Time")
 plt.xticks(processes)
 plt.tight_layout()
-plt.savefig('burst_times.png')
+plt.savefig('pics/burst_times.png')
 plt.show()
 
 # Plotting Arrival Time
@@ -54,7 +54,7 @@ plt.xlabel("Process ID")
 plt.ylabel("Arrival Time")
 plt.xticks(processes)
 plt.tight_layout()
-plt.savefig('arrival_times.png')
+plt.savefig('pics/arrival_times.png')
 plt.show()
 
 # Plotting Time of First Service
@@ -65,7 +65,7 @@ plt.xlabel("Process ID")
 plt.ylabel("Time of First Service")
 plt.xticks(processes)
 plt.tight_layout()
-plt.savefig('time_of_first_services.png')
+plt.savefig('pics/time_of_first_services.png')
 plt.show()
 
 # Plotting Completion Time
@@ -76,7 +76,7 @@ plt.xlabel("Process ID")
 plt.ylabel("Completion Time")
 plt.xticks(processes)
 plt.tight_layout()
-plt.savefig('completion_times.png')
+plt.savefig('pics/completion_times.png')
 plt.show()
 
 # Plotting Waiting Time
@@ -87,5 +87,5 @@ plt.xlabel("Process ID")
 plt.ylabel("Waiting Time")
 plt.xticks(processes)
 plt.tight_layout()
-plt.savefig('waiting_times.png')
+plt.savefig('pics/waiting_times.png')
 plt.show()
