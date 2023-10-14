@@ -1,3 +1,4 @@
+import random
 def SRTF(self):
     if not self.ready_queue:
         if len(self.allP) < self.total_processes:

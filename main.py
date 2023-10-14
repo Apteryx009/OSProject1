@@ -3,6 +3,7 @@ import heapq  # We will use a heap as a priority queue
 import csv
 from FCFS import FCFS
 from SRTF import SRTF
+from HRRN import HRRN
 
 def write_processes_to_csv(processes, filename):
     with open(filename, 'w', newline='') as file:
@@ -75,14 +76,15 @@ class SimulationClock:
                 self.ready_queue.append(the_new_p)
                 self.allP.append(the_new_p)  # Append the_new_p, not the_first_p
             #FCFS(self)
-            SRTF(self)
+            #SRTF(self)
+            HRRN(self)
 
         write_processes_to_csv(self.allP, 'stats.csv')
 
 
-avg_arrival_rate = 2 #this is lamda λ
+avg_arrival_rate = 20 #this is lamda λ
 sim_clock = SimulationClock(avg_arrival_rate, avg_service_time=0.7)
-sim_clock.run(total_processes=5)
+sim_clock.run(total_processes=10)
 
 
 
