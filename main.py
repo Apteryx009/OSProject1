@@ -102,6 +102,20 @@ class SimulationClock:
             #HRRN(self)
             #RR(self, self.allP, 1)
             #print(self.current_time, len(self.allP), self.processed_processes)
+        
+        #sim is done
+         #metric stuff
+        #figure out total excututation time
+        total_exec = 0.0
+        for process in self.allP:
+            if process.CT != None:
+                total_exec += process.BT
+        print(total_exec, " total execution time") 
+        print("The throughput is ", self.processed_processes / total_exec)
+       
+
+
+
 
         write_processes_to_csv(self.allP, 'stats.csv')
 
@@ -133,6 +147,8 @@ quantum = 1 #default
 quantum = args.quantum
 print(quantum)
 
+
+
 total_processes = 5  # Adjust this as needed
 
 # Simulation code here (create processes, run the scheduler, and print results)
@@ -140,6 +156,9 @@ total_processes = 5  # Adjust this as needed
 #avg_arrival_rate = 1 #this is lamda λ
 sim_clock = SimulationClock(avg_arrival_rate, avg_service_time)
 sim_clock.run(total_processes, scheduler, quantum )
+
+
+   
 
 
 
