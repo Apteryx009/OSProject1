@@ -1,7 +1,7 @@
 import random
 
 def RR(self, processes, quantum):
-        print(self.current_time)
+        #print(self.current_time)
         # Add newly arrived processes to the ready queue
         for process in processes:
             if process.AT <= self.current_time and process not in self.ready_queue and process.CT is None:
@@ -18,8 +18,11 @@ def RR(self, processes, quantum):
             current_process = self.ready_queue.pop(0)
             
             # If the process is just starting, set its TimeOf1stService
-            if current_process.TimeOf1stService is None:
-                current_process.TimeOf1stService = self.current_time
+            if current_process.process_id != 1:
+                if current_process.TimeOf1stService is None:
+                    current_process.TimeOf1stService = self.current_time
+            else:
+                current_process.TimeOf1stService = current_process.AT
             
            
 
@@ -32,6 +35,7 @@ def RR(self, processes, quantum):
             #print(self.current_time)
             if current_process.BTLeft == 0:
                 # Process has completed
+                #print("Process ", current_process.process_id, " has completed")
                 current_process.CT = self.current_time
                 self.processed_processes += 1
             else:
