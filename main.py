@@ -75,6 +75,7 @@ class SimulationClock:
             if len(self.allP) < total_processes:
                 #print(self.processed_processes)
                 the_new_p = createNewP()
+                print("New Process ", the_new_p.process_id, " has AT of ", the_new_p.AT, " and BT of ", the_new_p.BT)
                 self.ready_queue.append(the_new_p)
                 self.allP.append(the_new_p)  # Append the_new_p, not the_first_p
             #FCFS(self)
