@@ -85,16 +85,16 @@ class SimulationClock:
                 self.ready_queue.append(the_new_p)
                 self.allP.append(the_new_p)  # Append the_new_p, not the_first_p
             if scheduler == "FCFS":
-                print("Chosen FCFS")
+                #print("Chosen FCFS")
                 FCFS(self)
             elif scheduler == "SRTF":
-                print("Chosen SRTF")
+                #print("Chosen SRTF")
                 SRTF(self)
             elif scheduler == "HRRN":
-                print("Chosen HRRN")
+                #print("Chosen HRRN")
                 HRRN(self)
             elif scheduler == "RR":
-                print("Chosen RR")
+                #print("Chosen RR")
                 RR(self, self.allP, q)
             
             #FCFS(self)

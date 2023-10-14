@@ -26,8 +26,8 @@ def SRTF(self):
 
     if P.TimeOf1stService is None:
         P.TimeOf1stService = self.current_time
-    elif P.LastPreempted is not None:  # Only add to waiting time if it's not the first service and was preempted earlier
-        P.WT += (self.current_time - P.LastPreempted)
+    # elif P.LastPreempted is not None:  # Only add to waiting time if it's not the first service and was preempted earlier
+    #     P.WT += (self.current_time - P.LastPreempted)
 
     if len(self.allP) < self.total_processes:
         next_process_AT = self.allP[len(self.ready_queue)].AT if len(self.allP) > len(self.ready_queue) else float("inf")
@@ -44,4 +44,11 @@ def SRTF(self):
     else:
         # If the process hasn't completed, update LastPreempted and put it back in the ready_queue
         P.LastPreempted = self.current_time
+        print("Recalling schuedler")
+        #print(P.process_id, " got preempted at ", P.LastPreempted, " with ", P.BTLeft, " Left" )
         self.ready_queue.append(P)
+
+    # Calculate waiting times for other processes in the ready queue
+        for process in self.ready_queue:
+            if process.BTLeft != 0:
+                process.WT += time_quantum
