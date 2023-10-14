@@ -4,6 +4,7 @@ import csv
 from FCFS import FCFS
 from SRTF import SRTF
 from HRRN import HRRN
+from RR import RR
 
 def write_processes_to_csv(processes, filename):
     with open(filename, 'w', newline='') as file:
@@ -48,6 +49,7 @@ class SimulationClock:
         self.processed_processes = 0
         self.allP = []
         self.total_processes = 0
+        self.TotalExecutedTime = 0
 
     
 
@@ -77,14 +79,16 @@ class SimulationClock:
                 self.allP.append(the_new_p)  # Append the_new_p, not the_first_p
             #FCFS(self)
             #SRTF(self)
-            HRRN(self)
+            #HRRN(self)
+            RR(self, self.allP, 1)
+            #print(self.current_time, len(self.allP), self.processed_processes)
 
         write_processes_to_csv(self.allP, 'stats.csv')
 
 
-avg_arrival_rate = 20 #this is lamda λ
-sim_clock = SimulationClock(avg_arrival_rate, avg_service_time=0.7)
-sim_clock.run(total_processes=10)
+avg_arrival_rate = 1 #this is lamda λ
+sim_clock = SimulationClock(avg_arrival_rate, avg_service_time=1.6)
+sim_clock.run(total_processes=5)
 
 
 
