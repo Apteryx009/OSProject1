@@ -110,7 +110,7 @@ parser = argparse.ArgumentParser(description="Process Scheduling Simulator")
 parser.add_argument("scheduler", type=int, choices=[1, 2, 3, 4], help="Scheduler type (1=FCFS, 2=SRTF, 3=HRRN, 4=RR)")
 parser.add_argument("avg_arrival_rate", type=float, help="Average arrival rate (lambda)")
 parser.add_argument("avg_service_time", type=float, help="Average service time")
-parser.add_argument("--quantum", type=float, default=1.0, help="Time quantum for RR scheduler (default: 1.0)")
+parser.add_argument("quantum", type=float, default=1.0, help="Time quantum for RR scheduler (default: 1.0)")
 
 args = parser.parse_args()
 scheduler = ""
@@ -131,6 +131,7 @@ avg_arrival_rate = args.avg_arrival_rate
 avg_service_time = args.avg_service_time
 quantum = 1 #default
 quantum = args.quantum
+print(quantum)
 
 total_processes = 5  # Adjust this as needed
 
