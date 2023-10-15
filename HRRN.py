@@ -30,6 +30,12 @@ def HRRN(self):
     # Sort by RR and select the process with the highest RR
     P = max(arrived_processes, key=lambda x: x.RR)
     #print("Selected to work on ", P.process_id)
+
+    
+    #this is for calc of avg proccesse in RQ
+    time_difference = self.current_time - self.last_event_time
+    self.integral_ready_queue += len(self.ready_queue) * time_difference
+    self.last_event_time = self.current_time
     self.ready_queue.remove(P)
 
     if P.TimeOf1stService is None:

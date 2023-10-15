@@ -196,7 +196,7 @@ quantum = args.quantum
 print(quantum)
 
 
-total_processes = 1000  # Adjust this as needed
+total_processes = 100  # Adjust this as needed
 
 # Simulation code here (create processes, run the scheduler, and print results)
 
