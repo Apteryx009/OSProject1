@@ -102,8 +102,8 @@ class SimulationClock:
             if len(self.allP) < total_processes:
                 # print(self.processed_processes)
                 the_new_p = createNewP()
-                print("New Process ", the_new_p.process_id, " has AT of ",
-                      the_new_p.AT, " and BT of ", the_new_p.BT)
+                #print("New Process ", the_new_p.process_id, " has AT of ",
+                #      the_new_p.AT, " and BT of ", the_new_p.BT)
 
                 time_difference = self.current_time - self.last_event_time
                 self.integral_ready_queue += len(self.ready_queue) * \
@@ -196,7 +196,7 @@ quantum = args.quantum
 print(quantum)
 
 
-total_processes = 10000  # Adjust this as needed
+total_processes = 1000  # Adjust this as needed
 
 # Simulation code here (create processes, run the scheduler, and print results)
 

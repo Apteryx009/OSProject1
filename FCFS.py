@@ -44,5 +44,5 @@ def FCFS(self):
         time_difference = self.current_time - self.last_event_time
         self.integral_ready_queue += len(self.ready_queue) * time_difference
         self.last_event_time = self.current_time
-        #print(len(self.ready_queue))
+        
         self.ready_queue.pop(0)
