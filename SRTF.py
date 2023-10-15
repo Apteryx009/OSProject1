@@ -18,6 +18,7 @@ def SRTF(self):
     
     # If no processes have arrived yet, then jump to the arrival of the next process
     if index == len(self.ready_queue):
+        self.totalIdle += abs(self.ready_queue[0].AT - self.current_time)
         self.current_time = self.ready_queue[0].AT
         return
     

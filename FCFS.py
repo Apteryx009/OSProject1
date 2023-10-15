@@ -10,10 +10,12 @@ def FCFS(self):
             self.current_time += 0.001  # Small default time increment if no processes are left
         return
 
+    
     P = self.ready_queue[0]
 
     # If the current process hasn't arrived yet, advance time to its arrival
     if P.AT > self.current_time:
+        self.totalIdle += abs(P.AT - self.current_time)
         self.current_time = P.AT  # Set the current_time to the Arrival Time of the process
         return
 
@@ -37,4 +39,10 @@ def FCFS(self):
     if P.BTLeft == 0:
         P.CT = self.current_time
         self.processed_processes += 1
+
+        #this is for calc of avg proccesse in RQ
+        time_difference = self.current_time - self.last_event_time
+        self.integral_ready_queue += len(self.ready_queue) * time_difference
+        self.last_event_time = self.current_time
+        #print(len(self.ready_queue))
         self.ready_queue.pop(0)
