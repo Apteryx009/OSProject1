@@ -1,5 +1,4 @@
-import random
-import heapq  # We will use a heap as a priority queue
+import heapq  #
 import csv
 import argparse
 import random
