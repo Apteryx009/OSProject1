@@ -148,11 +148,11 @@ class SimulationClock:
                 total_exec += process.BT
 
         print(total_exec, " total execution time")
-        throughput = self.processed_processes / total_exec
-        print("The throughput is ", self.processed_processes / total_exec)
+        throughput = self.processed_processes / self.current_time
+        print("The throughput is ", throughput)
         total_cpu_time = self.totalIdle + total_exec
         print(total_cpu_time, total_exec, self.totalIdle)
-        cpu_util = (total_exec / total_cpu_time) * 100
+        cpu_util = (total_exec / total_cpu_time) * 10
         print("CPU UTIL: ", cpu_util, "%")
         average_processes_in_ready_queue = self.integral_ready_queue / self.current_time
         print("Avg process in RQ: ", average_processes_in_ready_queue)
