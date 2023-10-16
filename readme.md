@@ -13,6 +13,7 @@ Notice that even for schedulers 1-3, we need the 4th argument of a quantum, this
 4: Round Robin
 
 run.py is like the bash file given in the promt, data generated from this is stored in data
+NOTICE If you use this file, you will need to modify the file path
 
 data/1 holds the data of each and every process (this is just for records not for actual execution)
 data/2 holds the averages of the processes, it holds the average TAT per second, Total_Throughput Per Second ,CPU_Util (%), Avg Processses in_RQ
