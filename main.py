@@ -2,6 +2,7 @@ import heapq  #
 import csv
 import argparse
 import random
+#import psutil
 from FCFS import FCFS
 from SRTF import SRTF
 from HRRN import HRRN
@@ -124,7 +125,7 @@ class SimulationClock:
                 HRRN(self)
             elif scheduler == "RR":
                 # print("Chosen RR")
-                RR(self, self.allP, q)
+                RR(self, q)
 
             # FCFS(self)
             # SRTF(self)
@@ -157,6 +158,8 @@ class SimulationClock:
         print("Avg process in RQ: ", average_processes_in_ready_queue)
         avgTAT = totalTAT / Completed
         print("Average TAT ", avgTAT )
+
+       
 
         write_generalStats_to_csv(avgTAT, throughput, cpu_util, average_processes_in_ready_queue )
         write_processes_to_csv(self.allP, 'stats.csv')
@@ -195,7 +198,7 @@ quantum = args.quantum
 print(quantum)
 
 
-total_processes = 100  # Adjust this as needed
+total_processes = 10000  # Adjust this as needed
 
 # Simulation code here (create processes, run the scheduler, and print results)
 

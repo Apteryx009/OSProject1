@@ -1,10 +1,15 @@
 import random
 
-def RR(self, processes, quantum):
+def RR(self, quantum):
+    print("test")
     # Add newly arrived processes to the ready queue
-    for process in processes:
-        if process.AT <= self.current_time and process not in self.ready_queue and process.CT is None:
-            self.ready_queue.append(process)
+    if not self.ready_queue:
+        if len(self.allP) < self.total_processes:
+            next_arrival = random.expovariate(self.avg_arrival_rate)
+            self.current_time += next_arrival
+        else:
+            self.current_time += 0.001
+        return
 
     # If no processes have arrived yet, then jump to the arrival of the next process
     if not self.ready_queue or self.ready_queue[0].AT > self.current_time:
