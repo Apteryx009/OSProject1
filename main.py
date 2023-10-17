@@ -3,6 +3,7 @@ import csv
 import argparse
 import random
 #import psutil
+from Event import Event
 from FCFS import FCFS
 from SRTF import SRTF
 from HRRN import HRRN
@@ -62,6 +63,27 @@ class Process:
             # ... add other attributes as needed ...
         }
 
+def write_events_to_file(event_list, filename="sampleEvents.txt"):
+    with open(filename, 'w') as file:
+        # Writing a header for better readability
+        file.write("Time\tType\tProcess\n")
+        file.write("-------------------------\n")
+        
+        for event in event_list:
+            event_type = ""
+            
+            if event.type == 1:
+                event_type = "arrival"
+            elif event.type == 2:
+                event_type = "departure"
+            elif event.type == 3:
+                event_type = "swapping"
+            else:
+                event_type = "unknown"
+            
+            file.write(f"{event.time}\t{event_type}\t{event.Process}\n")
+
+
 
 class SimulationClock:
     def __init__(self, avg_arrival_rate, avg_service_time):
@@ -81,7 +103,7 @@ class SimulationClock:
         self.sum_ready_queue_lengths = 0.0
         self.total_duration_weighted = []
 
-
+  
         
 
     def run(self, total_processes, scheduler, q):
@@ -105,13 +127,10 @@ class SimulationClock:
             # Continue to schedule processes until total_processes have been processed
 
             if len(self.allP) < total_processes:
-                # print(self.processed_processes)
+                
                 the_new_p = createNewP()
-                #print("New Process ", the_new_p.process_id, " has AT of ",
-                #      the_new_p.AT, " and BT of ", the_new_p.BT)
-
-              
-
+                newEvent = Event(the_new_p, self.current_time, 1)
+                self.event_queue.append(newEvent)
                 self.ready_queue.append(the_new_p)
                 self.ready_queue.sort(key=lambda p: p.AT)
 
@@ -168,7 +187,7 @@ class SimulationClock:
         Avg_proccesses_in_rq = cpu_util / (1 - cpu_util) - cpu_util
         print("Avg processes in RQ", Avg_proccesses_in_rq)
        
-        
+        write_events_to_file(self.event_queue)
         
        
 

@@ -1,5 +1,5 @@
 import random
-
+from Event import Event
 def FCFS(self):
     if not self.ready_queue:
         # If there are no processes in the ready_queue, advance time to the next process arrival.
@@ -48,3 +48,5 @@ def FCFS(self):
         #print(len(self.ready_queue))
         
         self.ready_queue.remove(P)
+        newEvent = Event(P, self.current_time, 2) 
+        self.event_queue.append(newEvent)

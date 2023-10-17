@@ -1,4 +1,5 @@
 import random
+from Event import Event
 
 def RR(self, quantum):
     print("test")
@@ -26,6 +27,8 @@ def RR(self, quantum):
     self.last_event_time = self.current_time
     current_process = self.ready_queue.pop(0)
 
+    
+
     # If the process is just starting, set its TimeOf1stService
     if current_process.TimeOf1stService is None:
         current_process.TimeOf1stService = self.current_time
@@ -39,8 +42,15 @@ def RR(self, quantum):
         # Process has completed
         current_process.CT = self.current_time
         self.processed_processes += 1
+
+        newEvent = Event(current_process, self.current_time, 2) 
+        self.event_queue.append(newEvent)
+
     else:
         # Process was preempted
+        newEvent = Event(current_process, self.current_time, 3) 
+        self.event_queue.append(newEvent)
+        
         self.ready_queue.append(current_process)
 
     # Calculate waiting times for other processes in the ready queue

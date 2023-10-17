@@ -1,4 +1,5 @@
 import random
+from Event import Event
 
 def SRTF(self):
     if not self.ready_queue:
@@ -26,6 +27,9 @@ def SRTF(self):
     self.integral_ready_queue += len(self.ready_queue) * time_difference
     self.last_event_time = self.current_time
     
+
+    newEvent = Event(P, self.current_time, 2) 
+    self.event_queue.append(newEvent)
     self.ready_queue.remove(P)
     
     if P.TimeOf1stService is None:
@@ -44,6 +48,10 @@ def SRTF(self):
         self.processed_processes += 1
     else:
         P.LastPreempted = self.current_time
+
+        newEvent = Event(P, self.current_time, 3) 
+        self.event_queue.append(newEvent)
+        
         self.ready_queue.append(P)
 
     # Calculate waiting times for other processes in the ready queue
