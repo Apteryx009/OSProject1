@@ -21,15 +21,15 @@ def write_processes_to_csv(processes, filename):
 
 def write_generalStats_to_csv(TAT, Total_Throughput, CPU_Util, AvgPInRQ):
     with open("generalStats.csv", 'w', newline='') as file:
-        fieldnames = ['TAT', 'Total_Throughput', 'CPU_Util (%)', 'Avg_Proc_in_RQ']
+        fieldnames = ['Avg_TAT', 'Avg_Throughput', 'CPU_Util', 'Avg_Proc_in_RQ']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()  # Write the column headers
         
         # Create a dictionary with the data
         data = {
-            'TAT': TAT,
-            'Total_Throughput': Total_Throughput,
-            'CPU_Util (%)': CPU_Util,
+            'Avg_TAT': TAT,
+            'Avg_Throughput': Total_Throughput,
+            'CPU_Util': CPU_Util,
             'Avg_Proc_in_RQ': AvgPInRQ
         }
         
@@ -79,8 +79,11 @@ class SimulationClock:
         self.integral_ready_queue = 0.0
         self.last_event_time = 0.0
 
-    def run(self, total_processes, scheduler, q):
 
+        
+
+    def run(self, total_processes, scheduler, q):
+        print(len(self.ready_queue))
         self.total_processes = total_processes
 
         def createNewP():
@@ -105,10 +108,7 @@ class SimulationClock:
                 #print("New Process ", the_new_p.process_id, " has AT of ",
                 #      the_new_p.AT, " and BT of ", the_new_p.BT)
 
-                time_difference = self.current_time - self.last_event_time
-                self.integral_ready_queue += len(self.ready_queue) * \
-                    time_difference
-                self.last_event_time = self.current_time
+              
 
                 self.ready_queue.append(the_new_p)
                 self.ready_queue.sort(key=lambda p: p.AT)
@@ -126,6 +126,8 @@ class SimulationClock:
             elif scheduler == "RR":
                 # print("Chosen RR")
                 RR(self, q)
+            
+            print(len(self.ready_queue))
 
             # FCFS(self)
             # SRTF(self)
@@ -152,16 +154,20 @@ class SimulationClock:
         print("The throughput is ", throughput)
         total_cpu_time = self.totalIdle + total_exec
         print(total_cpu_time, total_exec, self.totalIdle)
-        cpu_util = (total_exec / total_cpu_time) * 10
+        cpu_util = (total_exec / total_cpu_time) 
         print("CPU UTIL: ", cpu_util, "%")
-        average_processes_in_ready_queue = self.integral_ready_queue / self.current_time
-        print("Avg process in RQ: ", average_processes_in_ready_queue)
+        #average_processes_in_ready_queue = self.integral_ready_queue / self.current_time
+        #print("Avg process in RQ: ", average_processes_in_ready_queue)
         avgTAT = totalTAT / Completed
         print("Average TAT ", avgTAT )
 
+        
+        
+        
+
        
 
-        write_generalStats_to_csv(avgTAT, throughput, cpu_util, average_processes_in_ready_queue )
+        write_generalStats_to_csv(avgTAT, throughput, cpu_util, 0 )
         write_processes_to_csv(self.allP, 'stats.csv')
 
 
