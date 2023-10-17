@@ -13,9 +13,11 @@ def FCFS(self):
     
     P = self.ready_queue[0]
     
+    
     # If the current process hasn't arrived yet, advance time to its arrival
     if P.AT > self.current_time:
         self.totalIdle += abs(P.AT - self.current_time)
+        
         self.current_time = P.AT  # Set the current_time to the Arrival Time of the process
         return
 
@@ -33,6 +35,7 @@ def FCFS(self):
         time_quantum = P.BTLeft
 
     P.BTLeft -= time_quantum
+    #print(len(self.ready_queue))
     self.current_time += time_quantum
 
     # If the process has completed, remove it from the queue
@@ -44,4 +47,4 @@ def FCFS(self):
 
         #print(len(self.ready_queue))
         
-        self.ready_queue.pop(0)
+        self.ready_queue.remove(P)

@@ -78,12 +78,14 @@ class SimulationClock:
         self.totalIdle = 0
         self.integral_ready_queue = 0.0
         self.last_event_time = 0.0
+        self.sum_ready_queue_lengths = 0.0
+        self.total_duration_weighted = []
 
 
         
 
     def run(self, total_processes, scheduler, q):
-        print(len(self.ready_queue))
+        #print(len(self.ready_queue))
         self.total_processes = total_processes
 
         def createNewP():
@@ -112,6 +114,8 @@ class SimulationClock:
 
                 self.ready_queue.append(the_new_p)
                 self.ready_queue.sort(key=lambda p: p.AT)
+
+
                 # Append the_new_p, not the_first_p
                 self.allP.append(the_new_p)
             if scheduler == "FCFS":
@@ -127,7 +131,7 @@ class SimulationClock:
                 # print("Chosen RR")
                 RR(self, q)
             
-            print(len(self.ready_queue))
+            #print(len(self.ready_queue))
 
             # FCFS(self)
             # SRTF(self)
@@ -161,13 +165,14 @@ class SimulationClock:
         avgTAT = totalTAT / Completed
         print("Average TAT ", avgTAT )
 
+        Avg_proccesses_in_rq = cpu_util / (1 - cpu_util) - cpu_util
+        print("Avg processes in RQ", Avg_proccesses_in_rq)
+       
         
         
-        
-
        
 
-        write_generalStats_to_csv(avgTAT, throughput, cpu_util, 0 )
+        write_generalStats_to_csv(avgTAT, throughput, cpu_util, Avg_proccesses_in_rq)
         write_processes_to_csv(self.allP, 'stats.csv')
 
 
